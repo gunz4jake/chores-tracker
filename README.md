@@ -13,6 +13,24 @@ Then open <http://localhost:4173>.
 
 There are no dependencies or build step. Data is stored in the browser's local storage for this first version.
 
+## Docker deployment
+
+On a Docker host with Git access to the private repository:
+
+```bash
+git clone https://github.com/gunz4jake/chores-tracker.git
+cd chores-tracker
+docker compose up -d --build
+```
+
+The app listens on port `8080` by default. Change it without editing the Compose file:
+
+```bash
+CHORE_TRACKER_PORT=8097 docker compose up -d --build
+```
+
+For a private repository, authenticate the host with a GitHub fine-grained token or a read-only deploy key. Do not put credentials in `compose.yaml` or commit them to the repository.
+
 ## Included
 
 - Daily, weekly, and biweekly recurring chores
