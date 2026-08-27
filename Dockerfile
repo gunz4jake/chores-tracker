@@ -1,4 +1,4 @@
-FROM nginx:1.27.5-alpine
+FROM nginx:1.31.4-alpine
 
 LABEL org.opencontainers.image.title="Good Enough Home" \
       org.opencontainers.image.description="A calm, local-first chores tracker"
