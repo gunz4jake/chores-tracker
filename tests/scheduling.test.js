@@ -82,3 +82,23 @@ test('custom chore IDs work when randomUUID is unavailable', async () => {
 
   assert.match(id, /^chore-/);
 });
+
+test('calendar month lists active chores on each due date', async () => {
+  const { buildCalendarMonth } = await import('../src/scheduling.js');
+  const chores = [
+    { id: 'daily', name: 'Dishes', frequency: 'daily', startDate: '2026-01-01', priority: 2 },
+    { id: 'weekly', name: 'Vacuum', frequency: 'weekly', weekday: 2, startDate: '2026-01-01', priority: 3 },
+    { id: 'inactive', name: 'Old chore', frequency: 'daily', startDate: '2026-01-01', active: false }
+  ];
+
+  const days = buildCalendarMonth(chores, date('2026-08-11'));
+
+  assert.equal(days.length, 31);
+  assert.equal(days[0].dateKey, '2026-08-01');
+  assert.equal(days.every((day) => day.chores.some((chore) => chore.id === 'daily')), true);
+  assert.deepEqual(
+    days.filter((day) => day.chores.some((chore) => chore.id === 'weekly')).map((day) => day.date.getDay()),
+    [2, 2, 2, 2]
+  );
+  assert.equal(days.some((day) => day.chores.some((chore) => chore.id === 'inactive')), false);
+});

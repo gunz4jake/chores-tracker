@@ -63,6 +63,23 @@ export function isDueOn(chore, value) {
   return false;
 }
 
+export function buildCalendarMonth(chores, month = new Date()) {
+  const year = month.getFullYear();
+  const monthIndex = month.getMonth();
+  const dayCount = new Date(year, monthIndex + 1, 0).getDate();
+
+  return Array.from({ length: dayCount }, (_, index) => {
+    const dayNumber = index + 1;
+    const date = new Date(year, monthIndex, dayNumber, 12);
+    const dateKey = `${year}-${String(monthIndex + 1).padStart(2, '0')}-${String(dayNumber).padStart(2, '0')}`;
+    const dueChores = chores
+      .filter((chore) => chore.active !== false && isDueOn(chore, date))
+      .sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0) || a.name.localeCompare(b.name));
+
+    return { date, dateKey, chores: dueChores };
+  });
+}
+
 export function buildTodayList(chores, date = new Date(), limit = 4) {
   return chores
     .filter((chore) => chore.active !== false && isDueOn(chore, date))

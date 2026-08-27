@@ -39,6 +39,7 @@ In Arcane, deploy the project with **Build & Deploy**. The Compose configuration
 - Daily chore limit and lighter-day mode
 - Complete and remove actions
 - Add chores with a frequency and time estimate
+- Monthly calendar with upcoming chores and completion status
 - Weekly completion and active-day summary
 - Responsive, mobile-friendly interface
 

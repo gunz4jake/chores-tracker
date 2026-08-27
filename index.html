@@ -13,6 +13,7 @@
       <a class="brand" href="#today">GOOD ENOUGH <span>HOME</span></a>
       <nav aria-label="Main navigation">
         <a class="nav-link active" href="#today">Today</a>
+        <a class="nav-link" href="#calendar">Calendar</a>
         <a class="nav-link" href="#review">Review</a>
       </nav>
     </header>
@@ -36,6 +37,18 @@
       <div class="hero compact"><p class="eyebrow">The last seven days</p><h1>Your <em>steady</em> week.</h1><p class="intro">Progress is progress, even when it isn’t perfect.</p></div>
       <div class="stats-grid"><div class="stat-card"><strong id="week-completed">0</strong><span>chores completed</span></div><div class="stat-card"><strong id="days-active">0</strong><span>days you showed up</span></div></div>
       <div class="review-note"><span class="note-mark">✦</span><div><h3>Keep it kind</h3><p>Missing a day doesn’t erase the care you’ve already given your home.</p></div></div>
+    </section>
+
+    <section id="calendar" class="page-section calendar-section hidden">
+      <div class="hero compact"><p class="eyebrow">Your routines</p><h1>A month at<br><em>a glance.</em></h1><p class="intro">See when each bit of home care is coming up.</p></div>
+      <div class="calendar-toolbar">
+        <button id="previous-month" class="calendar-button" aria-label="Previous month">←</button>
+        <h2 id="calendar-month"></h2>
+        <button id="current-month" class="calendar-today-button">Today</button>
+        <button id="next-month" class="calendar-button" aria-label="Next month">→</button>
+      </div>
+      <div class="calendar-weekdays" aria-hidden="true"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+      <div id="calendar-grid" class="calendar-grid"></div>
     </section>
   </main>
   <dialog id="chore-dialog"><form method="dialog" id="chore-form"><button id="close-chore-dialog" type="button" class="close" aria-label="Close">×</button><p class="eyebrow">New routine</p><h2>Add a chore</h2><label>What needs doing?<input name="name" required placeholder="e.g. Wipe kitchen counters"></label><label>How often?<select name="frequency"><option value="daily">Every day</option><option value="weekly">Once a week</option><option value="biweekly">Every other week</option></select></label><label>Estimated minutes<input name="minutes" type="number" min="1" max="180" value="10"></label><button type="submit" class="primary-button" value="default">Add to my list</button></form></dialog>
