@@ -39,6 +39,11 @@ export function createCustomChore(values, date = new Date(), existingChores = []
   };
 }
 
+export function createChoreId(cryptoApi = globalThis.crypto) {
+  if (typeof cryptoApi?.randomUUID === 'function') return cryptoApi.randomUUID();
+  return `chore-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+}
+
 function startOfDay(value) {
   const result = new Date(value);
   result.setHours(0, 0, 0, 0);

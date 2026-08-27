@@ -1,4 +1,4 @@
-import { buildTodayList, createCustomChore, getDefaultChores, getWeeklyStats } from './scheduling.js';
+import { buildTodayList, createChoreId, createCustomChore, getDefaultChores, getWeeklyStats } from './scheduling.js';
 
 const STORAGE_KEY = 'good-enough-home-v1';
 const today = new Date();
@@ -49,11 +49,12 @@ function renderReview() {
 }
 
 document.querySelector('#add-chore').addEventListener('click', () => document.querySelector('#chore-dialog').showModal());
+document.querySelector('#close-chore-dialog').addEventListener('click', () => document.querySelector('#chore-dialog').close());
 document.querySelector('#chore-form').addEventListener('submit', (event) => {
   event.preventDefault();
   const form = new FormData(event.currentTarget);
   state.chores.push(createCustomChore({
-    id: crypto.randomUUID(),
+    id: createChoreId(),
     name: form.get('name'),
     minutes: form.get('minutes'),
     frequency: form.get('frequency')

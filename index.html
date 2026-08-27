@@ -38,7 +38,7 @@
       <div class="review-note"><span class="note-mark">✦</span><div><h3>Keep it kind</h3><p>Missing a day doesn’t erase the care you’ve already given your home.</p></div></div>
     </section>
   </main>
-  <dialog id="chore-dialog"><form method="dialog" id="chore-form"><button class="close" value="cancel" aria-label="Close">×</button><p class="eyebrow">New routine</p><h2>Add a chore</h2><label>What needs doing?<input name="name" required placeholder="e.g. Wipe kitchen counters"></label><label>How often?<select name="frequency"><option value="daily">Every day</option><option value="weekly">Once a week</option><option value="biweekly">Every other week</option></select></label><label>Estimated minutes<input name="minutes" type="number" min="1" max="180" value="10"></label><button class="primary-button" value="default">Add to my list</button></form></dialog>
+  <dialog id="chore-dialog"><form method="dialog" id="chore-form"><button id="close-chore-dialog" type="button" class="close" aria-label="Close">×</button><p class="eyebrow">New routine</p><h2>Add a chore</h2><label>What needs doing?<input name="name" required placeholder="e.g. Wipe kitchen counters"></label><label>How often?<select name="frequency"><option value="daily">Every day</option><option value="weekly">Once a week</option><option value="biweekly">Every other week</option></select></label><label>Estimated minutes<input name="minutes" type="number" min="1" max="180" value="10"></label><button type="submit" class="primary-button" value="default">Add to my list</button></form></dialog>
   <script type="module" src="src/app.js"></script>
 </body>
 </html>

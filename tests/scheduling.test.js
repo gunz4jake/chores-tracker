@@ -74,3 +74,11 @@ test('a newly added custom chore appears in an already full today list', async (
 
   assert.deepEqual(buildTodayList([...chores, custom], today, 2).map((chore) => chore.id), ['custom', '1']);
 });
+
+test('custom chore IDs work when randomUUID is unavailable', async () => {
+  const { createChoreId } = await import('../src/scheduling.js');
+
+  const id = createChoreId({});
+
+  assert.match(id, /^chore-/);
+});
