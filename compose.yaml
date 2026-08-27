@@ -6,7 +6,7 @@ services:
     container_name: chores-tracker
     restart: unless-stopped
     ports:
-      - "${CHORE_TRACKER_PORT:-8080}:80"
+      - "${CHORE_TRACKER_PORT:-8097}:80"
     labels:
       app: chores-tracker
       service: web

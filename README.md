@@ -23,10 +23,10 @@ cd chores-tracker
 docker compose up -d --build
 ```
 
-The app listens on port `8080` by default. Change it without editing the Compose file:
+The app listens on port `8097` by default. Change it without editing the Compose file:
 
 ```bash
-CHORE_TRACKER_PORT=8097 docker compose up -d --build
+CHORE_TRACKER_PORT=8100 docker compose up -d --build
 ```
 
 For a private repository, authenticate the host with a GitHub fine-grained token or a read-only deploy key. Do not put credentials in `compose.yaml` or commit them to the repository.
