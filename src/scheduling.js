@@ -21,6 +21,24 @@ export function getDefaultChores() {
   ];
 }
 
+export function createCustomChore(values, date = new Date(), existingChores = []) {
+  const highestPriority = existingChores.reduce(
+    (highest, chore) => Math.max(highest, Number(chore.priority) || 0),
+    0
+  );
+
+  return {
+    id: values.id,
+    name: values.name,
+    room: 'Home',
+    minutes: Number(values.minutes),
+    frequency: values.frequency,
+    startDate: date.toISOString().slice(0, 10),
+    weekday: date.getDay(),
+    priority: highestPriority + 1
+  };
+}
+
 function startOfDay(value) {
   const result = new Date(value);
   result.setHours(0, 0, 0, 0);

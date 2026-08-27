@@ -57,3 +57,20 @@ test('weekly stats count completed chores in the last seven days', () => {
   ];
   assert.deepEqual(getWeeklyStats(completions, date('2026-08-11')), { completed: 2, daysActive: 2 });
 });
+
+test('a newly added custom chore appears in an already full today list', async () => {
+  const { createCustomChore } = await import('../src/scheduling.js');
+  const today = date('2026-08-11');
+  const chores = [
+    { id: '1', name: 'Dishes', frequency: 'daily', startDate: '2026-08-03', priority: 5 },
+    { id: '2', name: 'Counters', frequency: 'daily', startDate: '2026-08-03', priority: 4 }
+  ];
+
+  const custom = createCustomChore(
+    { id: 'custom', name: 'Clean windows', frequency: 'daily', minutes: 15 },
+    today,
+    chores
+  );
+
+  assert.deepEqual(buildTodayList([...chores, custom], today, 2).map((chore) => chore.id), ['custom', '1']);
+});

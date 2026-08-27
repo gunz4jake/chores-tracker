@@ -1,4 +1,4 @@
-import { buildTodayList, getDefaultChores, getWeeklyStats } from './scheduling.js';
+import { buildTodayList, createCustomChore, getDefaultChores, getWeeklyStats } from './scheduling.js';
 
 const STORAGE_KEY = 'good-enough-home-v1';
 const today = new Date();
@@ -52,7 +52,12 @@ document.querySelector('#add-chore').addEventListener('click', () => document.qu
 document.querySelector('#chore-form').addEventListener('submit', (event) => {
   event.preventDefault();
   const form = new FormData(event.currentTarget);
-  state.chores.push({ id: crypto.randomUUID(), name: form.get('name'), room: 'Home', minutes: Number(form.get('minutes')), frequency: form.get('frequency'), startDate: isoDate(today), priority: 2 });
+  state.chores.push(createCustomChore({
+    id: crypto.randomUUID(),
+    name: form.get('name'),
+    minutes: form.get('minutes'),
+    frequency: form.get('frequency')
+  }, today, state.chores));
   save(); event.currentTarget.reset(); document.querySelector('#chore-dialog').close(); renderToday();
 });
 document.querySelector('#light-day').addEventListener('click', () => { state.limit = state.limit === 4 ? 3 : 4; save(); renderToday(); document.querySelector('#light-day').textContent = state.limit === 3 ? 'Return to full list' : 'Make it lighter'; });
