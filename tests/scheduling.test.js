@@ -1,8 +1,33 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { isDueOn, buildTodayList, getWeeklyStats } from '../src/scheduling.js';
+import { isDueOn, buildTodayList, getDefaultChores, getWeeklyStats } from '../src/scheduling.js';
 
 const date = (value) => new Date(`${value}T12:00:00`);
+
+test('default chores cover routine whole-home cleaning', () => {
+  const chores = getDefaultChores();
+  const names = new Set(chores.map((chore) => chore.name));
+
+  [
+    'Wash dishes',
+    'Wipe kitchen counters',
+    'Tidy the main living area',
+    'Vacuum floors',
+    'Mop hard floors',
+    'Clean the toilet',
+    'Clean the shower or tub',
+    'Dust surfaces',
+    'Change bed linens',
+    'Wash a load of laundry',
+    'Empty trash and recycling',
+    'Clean the stovetop and microwave',
+    'Clean mirrors',
+    'Clear expired food from the fridge'
+  ].forEach((name) => assert.equal(names.has(name), true, `missing default chore: ${name}`));
+
+  assert.equal(chores.every((chore) => chore.room && chore.minutes > 0 && chore.frequency), true);
+  assert.deepEqual(new Set(chores.map((chore) => chore.frequency)), new Set(['daily', 'weekly', 'biweekly']));
+});
 
 test('daily chores are due every day', () => {
   const chore = { id: 'dishes', frequency: 'daily', startDate: '2026-08-03' };

@@ -1,15 +1,9 @@
-import { buildTodayList, getWeeklyStats } from './scheduling.js';
+import { buildTodayList, getDefaultChores, getWeeklyStats } from './scheduling.js';
 
 const STORAGE_KEY = 'good-enough-home-v1';
 const today = new Date();
 const isoDate = (date) => date.toISOString().slice(0, 10);
-const defaultChores = [
-  { id: 'dishes', name: 'Wash dishes', room: 'Kitchen', minutes: 10, frequency: 'daily', startDate: '2026-01-01', priority: 3 },
-  { id: 'counters', name: 'Wipe kitchen counters', room: 'Kitchen', minutes: 5, frequency: 'daily', startDate: '2026-01-01', priority: 2 },
-  { id: 'reset', name: 'Reset the main room', room: 'Living room', minutes: 10, frequency: 'daily', startDate: '2026-01-01', priority: 1 },
-  { id: 'vacuum', name: 'Vacuum main floors', room: 'Home', minutes: 15, frequency: 'weekly', weekday: 1, startDate: '2026-01-01', priority: 3 },
-  { id: 'bathroom', name: 'Clean the bathroom sink', room: 'Bathroom', minutes: 5, frequency: 'weekly', weekday: 3, startDate: '2026-01-01', priority: 3 }
-];
+const defaultChores = getDefaultChores();
 
 let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || { chores: defaultChores, completions: [], limit: 4 };
 const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
