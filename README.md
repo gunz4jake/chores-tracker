@@ -31,6 +31,8 @@ CHORE_TRACKER_PORT=8100 docker compose up -d --build
 
 For a private repository, authenticate the host with a GitHub fine-grained token or a read-only deploy key. Do not put credentials in `compose.yaml` or commit them to the repository.
 
+In Arcane, deploy the project with **Build & Deploy**. The Compose configuration uses `pull_policy: build` so Arcane builds `chores-tracker:local` from this repository instead of trying to pull that local-only image from a registry.
+
 ## Included
 
 - Daily, weekly, and biweekly recurring chores

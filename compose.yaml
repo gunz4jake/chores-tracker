@@ -3,6 +3,7 @@ services:
     build:
       context: .
     image: chores-tracker:local
+    pull_policy: build
     container_name: chores-tracker
     restart: unless-stopped
     ports:
